@@ -20,11 +20,11 @@ def get_book(book_id):
 
 @app.route('/api/books', methods=['POST'])
 def create_book():
-    pass
+    pass # dica: body em request.form
 
 @app.route('/api/books/<int:book_id>', methods=['PUT'])
 def update_book(book_id):
-    pass
+    pass # dica: body em request.form
 
 @app.route('/api/books/<int:book_id>', methods=['DELETE'])
 def delete_book(book_id):
