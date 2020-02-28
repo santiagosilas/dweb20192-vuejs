@@ -1,5 +1,5 @@
-from flask import render_template
-from flask import jsonify
+from flask import render_template, abort
+from flask import jsonify, make_response
 from app import api as app
 
 # uma lista de livros, para simular uma base de dados
@@ -9,14 +9,29 @@ books = [
     {'id':3, 'title': 'Web Scraping Com Python',  'author': 'Mitchell e Kinoshita', 'read': False},
 ]
 
+@app.errorhandler(404)
+def  not_found(error):
+    return make_response(
+        jsonify({'error':'not found'}), 
+        404)
 
 @app.route('/api/books', methods=['GET'])    
 def get_books():
     return jsonify({'books': books})
 
-@app.route('/api/books/<int:book_id>', methods=['GET']) 
+
+
+@app.route('/api/books/<int:book_id>') 
 def get_book(book_id):
-    pass
+    for book in books:
+        if book['id'] == book_id:
+            return jsonify({'book': book})
+    abort(404)
+
+
+
+
+
 
 @app.route('/api/books', methods=['POST'])
 def create_book():

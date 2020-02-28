@@ -10,6 +10,13 @@ if __name__ == '__main__':
     print('Response:', json.dumps(books, indent=1))
     print()
 
+    url = 'http://localhost:5000/api/books/42'
+
+    books = get(url).json()
+    print('GET {}'.format(url))
+    print('Response:', json.dumps(books, indent=1))
+    print()
+
     # Implementar o test para o POST
     #url = 'http://localhost:5001/api/books'
     #params = {'title':'Vue.js', 'author': 'Fulano de Tal', 'read': False}
