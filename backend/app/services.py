@@ -5,7 +5,6 @@ def drop_db():
     db.drop_all()
 
 def create_db():
-    # db.drop_all()
     db.create_all()
     print("Banco criado.")
 
@@ -21,23 +20,33 @@ def populate_db():
     db.session.add(nota)
     db.session.commit()
 
+
     # Atualiza uma nota
     nota.titulo = 'Estudar Flask-SqlAlchemy'
     db.session.commit()
 
-    # Atualiza uma nota
-    nota = Nota.query.all()[0]
+
+    # Obter notas
+    tudo = Nota.query.all()
+    nota = tudo[0]
     db.session.delete(nota)
     db.session.commit()
+
+
+
 
     # Obtém todas as notas
     notas = Nota.query.all()
     for nota in notas:
         print('nota:', nota.titulo)
 
+
+
     # Filtrando informações
-    notas = Nota.query.filter_by(titulo='Estudar Flask-SqlAlchemy').all()
+    filtro = Nota.query.filter_by(
+        titulo='Estudar Flask-SqlAlchemy')
+    print(type(filtro))
+    notas = filtro.all()
+    print(type(notas))
     print(notas[0].titulo)
 
-    notas = Nota.query.filter_by(titulo='...').all()
-    print(notas)

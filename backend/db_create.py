@@ -1,7 +1,5 @@
-from app import api, db, services
-def run():
-    services.create_db()
+from app import db
 
 if __name__ == '__main__':
-    run()
+    db.create_all()
     print("done.")
